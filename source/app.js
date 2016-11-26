@@ -19,8 +19,6 @@ app.get("/room/:name/otherUsers", function(req, res) {
     res.send(JSON.stringify(lobby.game));    
 });
 
-
-
 app.get('/room/:name', function(req, res) {
     res.sendFile(path.join(__dirname, '/public/views/' + 'room.html'));
 });
