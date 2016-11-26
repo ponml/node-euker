@@ -1,0 +1,20 @@
+<html>
+    <head>	
+		<title>Cards</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	    <link href="styles/main.css" rel="stylesheet">
+    </head>
+    <body>
+    	<div class ="main-wrapper">
+			<div class="room-wrapper">
+				<span class="room-title">Join a room</span>
+				<input class="room-input" data-bind="value: roomTitle"/>
+			</div>
+		</div>
+	</body>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+	<script src="index.js"></script>
+</html>

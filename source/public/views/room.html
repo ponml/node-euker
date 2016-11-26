@@ -1,0 +1,143 @@
+<html>
+    <head>	
+		<title>Room</title>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	    <link href="/styles/main.css" rel="stylesheet">
+	    <link href="/styles/cards.css" rel="stylesheet">
+    </head>
+    <body>
+    		<!-- ko if: isLoaded  -->
+    				<!-- ko with: tableViewModel  -->
+					<!-- ko ifnot: gameStarted -->
+    					<!-- ko foreach: otherPlayers -->
+    						<!-- ko if: assigned -->
+    							<div class="otherplayers">
+    								<span data-bind="text: name"></span>
+    							</div>
+    						<!-- /ko -->
+    					<!-- /ko -->
+    					<div class="player">
+    						<span>YOU ARE PLAYER:</span><span data-bind="text: user.player.name"></span>
+    					</div>
+    				<!-- /ko -->
+					<!-- ko if: gameStarted -->
+						<!-- ko template: {name: 'gameplay', data: $data} --><!-- /ko -->
+					<!-- /ko -->
+
+					<!-- /ko -->
+			
+			<!-- /ko -->
+	</body>	
+	<script src="https://code.jquery.com/jquery-2.2.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+    <script src="/game.js"></script>
+	<script src="/room.js"></script>
+
+	<script id="gameplay" type="text/html">
+		<div class="flex-parent">
+			<div class="team1-score">
+				<span> TEAM1 SCORE: </span><span data-bind="text: teamOneScore"></span>
+			</div>
+			<!-- ko template: { name: 'other-player-hand', data: getOtherPlayer(2)} --><!-- /ko -->
+			<div class="team2-score">
+				<span> TEAM2 SCORE: </span><span data-bind="text: teamTwoScore"></span>
+			</div>
+		</div>
+		<div class="flex-parent">
+			<!-- ko template: { name: 'other-player-hand', data: getOtherPlayer(1)} --><!-- /ko -->
+			<div class="played-cards">
+
+				<div class="center-played-cards">
+
+					<div class="left">
+						<div class="left-card" data-bind="with: getOtherPlayer(1).playedCard">
+							<div data-bind="css: $parent.getCardCss(value, suit)">
+								<div class="face"></div>
+							</div>							
+						</div>							
+					</div>
+					<div class="top-bottom">
+						<div class="top-card" data-bind="with: getOtherPlayer(2).playedCard">
+							<div data-bind="css: $parent.getCardCss(value, suit)">
+								<div class="face"></div>
+							</div>
+						</div>					
+						<div class="bottom-card" data-bind="with: player.playedCard">
+							<div data-bind="css: $parent.getCardCss(value, suit)">
+								<div class="face"></div>
+							</div>							
+						</div>							
+					</div>
+					<div class="right">						
+						<div class="right-card" data-bind="with: getOtherPlayer(3).playedCard">
+							<div data-bind="css: $parent.getCardCss(value, suit)">
+								<div class="face"></div>
+							</div>							
+						</div>
+					</div>			
+				</div>		
+
+
+		
+			</div>
+		<!-- ko template: { name: 'other-player-hand', data: getOtherPlayer(3)} --><!-- /ko -->
+		</div>
+
+		<div class="flex-parent">
+			<div>				
+				<span>TRUMP SUIT IS: </span><div class="info"><div data-bind="css: trumpSuit()">&nbsp;</div></div></br>
+			</div>
+			<div class="otherPlayer" data-bind="css: { 'not-my-turn': !player.isMyTurn() }">
+				<span>PLAYER </span><span data-bind="text: player.id"></span>
+				<div class="flex hand">
+					<!-- ko foreach: player.hand.cards -->
+						<div data-bind="click: function() { $parent.player.playCard($data, $parent.trickSuit, $parent.trumpSuit) }">
+							<div data-bind="css: $parent.getCardCss(value, suit)">
+								<div class="face"></div>
+							</div>
+						</div>
+					<!-- /ko -->
+				</div>
+				<!-- ko if: player.isMyTurn -->
+				<span>IT'S YOUR TURN</span>
+				<!-- /ko -->
+			</div>
+
+			<div>
+				<span>TRICK SUIT IS: </span><div class="info"><div data-bind="css: trickSuit()">&nbsp;</div></div></br>
+			</div>
+		</div>	
+		<div>
+			
+		</div>	
+		<div>
+			<!-- ko foreach: trickWinners -->
+			<span> Trick winner is player </span><span data-bind="text: playerId"></span> with <span data-bind="text: value"></span><span> of </span><span data-bind="text: suit"></span> </br>
+			p1: <span data-bind="text: p1.value"></span><span> of </span><span data-bind="text: p1.suit"></span> </br>
+			p2: <span data-bind="text: p2.value"></span><span> of </span><span data-bind="text: p2.suit"></span> </br>
+			p3: <span data-bind="text: p3.value"></span><span> of </span><span data-bind="text: p3.suit"></span> </br>
+			p4: <span data-bind="text: p4.value"></span><span> of </span><span data-bind="text: p4.suit"></span> </br>
+
+			<!-- /ko -->
+		</div>	
+
+	</script>   
+
+	<script id="other-player-hand" type="text/html">
+		<div class="otherPlayer" data-bind="css: { 'not-my-turn': !isMyTurn() }">
+			<span>PLAYER </span><span data-bind="text: id"></span>
+			<div class="flex hand">
+				<!-- ko foreach: hand.cards -->
+					<div class="card">
+						<div class="back"></div>
+					</div>
+				<!-- /ko -->	
+			</div>
+		</div>
+	</script>
+
+</html>
+
+

@@ -1,0 +1,136 @@
+body {
+	font-size: 16px;
+	font-weight: bold;
+	background-color: #45a173;
+}
+
+.main-wrapper {
+	background: #2B2B2B;
+	width: 100%;
+	height: 100%;
+	font-size: 48px;
+}
+
+.room-wrapper {
+	position: relative;
+	margin: 0 auto;
+	top: 50%;
+}
+
+.room-title {
+	margin: 0 auto;
+	padding-left: 29px;
+	display: block;
+	color: white;
+	width: 350px;
+}
+
+.room-input {
+	margin: 0 auto;
+	display: block;
+}
+
+.not-my-turn {
+	opacity: 0.6;
+}
+
+
+.my-card {
+	cursor: pointer;
+	width: 75px;
+	height: 100px;
+	background: green;
+	margin: 5px;
+}
+
+.flex-parent {
+	display: flex;
+	min-height: 250px;
+}
+
+.flex-parent > div {
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.flex {
+	display: flex;
+}
+
+.played-cards {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+}
+
+.center-played-cards {
+  	justify-content: center;
+  	display: flex;
+}
+
+.played-cards .left {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	min-width: 3.975rem;
+}
+
+.played-cards .top-bottom {
+	display: flex;
+	flex-direction: column;	
+	min-width: 3.975rem;
+}
+
+.played-cards .right {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	min-width: 3.975rem;
+}
+
+.top-card {
+	display: flex;	
+	align-items: center; 
+	justify-content: flex-start;
+}
+
+.left-card {
+	display: flex;
+	justify-content: center;
+	 align-items: center; 
+}
+
+.right-card {
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
+
+.bottom-card {
+	display: flex;	
+	align-items: center; 
+	justify-content: flex-end;
+}
+
+.played-card-slot {
+/*	width: 75px;
+	height: 100px;*/
+}
+
+.hand {
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.team1-score,
+.team2-score {
+	background-color: thistle;
+}
+
+.otherPlayer {
+	background-color: #36648B;
+}
+
+.player {
+	background-color: seafoam;
+}
